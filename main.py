@@ -1,6 +1,8 @@
 #
 #
 #
+import math
+
 import pygame
 from pygame import Color
 import time
@@ -28,11 +30,11 @@ def draw_it(screen, cur_pos, new_pos):
 
 
 def main():
-    white = (255, 255, 255)
+    black = (0, 0, 0, 255)
     screen = init_screen('Key Draw')
     width = screen.get_width()
     height = screen.get_height()
-    start_pos = (width / 2, height / 2)
+    start_pos = (math.ceil(width / 2), math.ceil(height / 2))
     cur_pos = start_pos
     new_pos = start_pos
     draw = False
@@ -62,26 +64,30 @@ def main():
                 running = False
 
         if direction == "north" and draw:
-            print(direction)
             new_pos = (cur_pos[0], cur_pos[1] - 5)
+            if screen.get_at(new_pos) != black:
+                print("*****BOOM*****")
             draw_it(screen, cur_pos, new_pos)
             cur_pos = new_pos
         if direction == "west" and draw:
-            print(direction)
             new_pos = (cur_pos[0] - 5, cur_pos[1])
+            if screen.get_at(new_pos) != black:
+                print("*****BOOM*****")
             draw_it(screen, cur_pos, new_pos)
             cur_pos = new_pos
         if direction == "south" and draw:
-            print(direction)
             new_pos = (cur_pos[0], cur_pos[1] + 5)
+            if screen.get_at(new_pos) != black:
+                print("*****BOOM*****")
             draw_it(screen, cur_pos, new_pos)
             cur_pos = new_pos
         if direction == "east" and draw:
-            print(direction)
             new_pos = (cur_pos[0] + 5, cur_pos[1])
+            if screen.get_at(new_pos) != black:
+                print("*****BOOM*****")
             draw_it(screen, cur_pos, new_pos)
             cur_pos = new_pos
-        time.sleep(0.05)
+        time.sleep(0.01)
 
     pygame.quit()
 
